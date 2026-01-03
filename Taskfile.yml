@@ -1,0 +1,39 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Build the application by default
+    cmds:
+      - task: build
+
+  build:
+    desc: Build the monkey executable
+    cmds:
+      - echo "Building binary..."
+      # This targets your main package inside src/monkey and outputs to project root
+      - go build -o monkey ./src/monkey
+
+  run:
+    desc: Run the project directly
+    cmds:
+      - go run ./src/monkey
+
+  watch:
+    desc: Watch for file changes and run the project automatically
+    watch: true
+    sources:
+      - ./**/*.go
+    cmds:
+      - task: run
+
+  test:
+    desc: Run all unit tests
+    cmds:
+      # ./... recursively finds tests in all subdirectories (including src/monkey)
+      - go test -v ./...
+
+  clean:
+    desc: Remove the binary
+    cmds:
+      - rm -f monkey
+      - echo "Cleaned up binary."
