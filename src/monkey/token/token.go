@@ -1,5 +1,12 @@
 package token
 
+type TokenType string
+
+type Token struct {
+	Type    TokenType
+	Literal string
+}
+
 const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
@@ -53,11 +60,4 @@ func LookupIdent(ident string) TokenType {
 		return tok
 	}
 	return IDENT
-}
-
-type TokenType string
-
-type Token struct {
-	Type    TokenType
-	Literal string
 }
